@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biografia sobre mi</title>
+
+    <!-- TU CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a, #38bdf8);
+            padding: 20px;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            padding: 35px 30px;
+            text-align: center;
+            animation: aparecer 0.6s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .titulo {
+            font-size: 30px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+
+        .datos {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .dato {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px 18px;
+            text-align: left;
+        }
+
+        .etiqueta {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .valor {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .lista {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .lista li {
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 16px;
+            margin: 15px 0;
+        }
+
+        .boton {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #2563eb, #0ea5e9);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+    <div class="tarjeta">
+
+        <h1 class="titulo">Hola 👋</h1>
+        <p class="subtitulo">Estos son algunos datos interesantes sobre mí</p>
+
+        <!-- DATOS -->
+        <div class="datos">
+            <div class="dato">
+                <span class="etiqueta">Nombre</span>
+                <span class="valor" th:text="${Nombre}"></span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Apellido</span>
+                <span class="valor" th:text="${Apellido}"></span>
+            </div>
+
+            <div class="dato">
+                <span class="etiqueta">Edad</span>
+                <span class="valor" th:text="${Edad}"></span>
+            </div>
+        </div>
+
+        <!-- ÁLBUMES -->
+        <h3 class="subtitulo">🎵 Álbumes favoritos</h3>
+        <ul class="lista">
+            <li th:each="alb : ${Albumes}" th:text="${alb}"></li>
+        </ul>
+
+        <!-- IMAGEN -->
+        <h3 class="subtitulo">📸 Collage musical de todos los albumes que he escuchado:</h3>
+        <img th:src="@{/collage.jpeg}">
+
+        <!-- LIBROS -->
+        <h3 class="subtitulo">📚 Libros favoritos</h3>
+        <ul class="lista">
+            <li th:each="lib : ${Libros}" th:text="${lib}"></li>
+        </ul>
+
+        <!-- SERIES -->
+        <h3 class="subtitulo">🎬 Series favoritas</h3>
+        <ul class="lista">
+            <li th:each="ser : ${Series}" th:text="${ser}"></li>
+        </ul>
+
+        <!-- EXTRA -->
+        <h3 class="subtitulo">✨ Datos extra</h3>
+        <ul class="lista">
+            <li>Me encanta escribir cuentos en mi tiempo libre.</li>
+            <li>Disfruto jugar videojuegos indie con amigos.</li>
+            <li>Trato de hacer música en FL Studio.</li>
+            <li>Me gusta el skating sobre hielo.</li>
+        </ul>
+
+        <!-- BOTÓN -->
+        <a class="boton" th:href="@{/datos}">Ir a Datos</a>
+        <a class="boton" th:href="@{/usuario}">Ir a Usuarios</a>
+        <a class="boton" th:href="@{/home}">Ir a Home</a>
+
+    </div>
+</div>
+
+</body>
+</html>
